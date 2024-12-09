@@ -18,9 +18,10 @@
         "name": "next"
       }
     ],
+    "baseUrl": "src", // Cấu hình base URL là thư mục src
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": ["*"]
+    } // Định nghĩa alias @ sẽ trỏ đến thư mục src
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

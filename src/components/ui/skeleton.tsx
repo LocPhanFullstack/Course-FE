@@ -1,4 +1,4 @@
-import { cn } from "@/configs/utils/components";
+import { cn } from "../../../shared/utils/components";
 
 function Skeleton({
   className,

@@ -1,4 +1,5 @@
 import clsx, { type ClassValue } from "clsx";
+import React from "react";
 import { twMerge } from "tailwind-merge";
 import * as z from "zod";
 
@@ -42,3 +43,36 @@ export const courseCategories = [
   { value: "mathematics", label: "Mathematics" },
   { value: "artificial-intelligence", label: "Artificial Intelligence" },
 ] as const;
+
+export const combineComponents = (components: React.ComponentType<any>[]) => {
+  const CombinedComponent = components.reduce(
+    (
+      AccumulatedComponents: React.ComponentType<any>,
+      CurrentComponent: React.ComponentType<any>
+    ) => {
+      const WrappedComponent = ({
+        children,
+        ...props
+      }: React.ComponentProps<any>) => {
+        return (
+          <AccumulatedComponents {...props}>
+            <CurrentComponent {...props}>{children}</CurrentComponent>
+          </AccumulatedComponents>
+        );
+      };
+
+      // Set display name for better debugging
+      WrappedComponent.displayName = `Wrapped(${
+        CurrentComponent.displayName || CurrentComponent.name
+      })`;
+
+      return WrappedComponent;
+    },
+    ({ children }: React.ComponentProps<any>) => <>{children}</>
+  );
+
+  // Set display name for the combined component
+  CombinedComponent.displayName = "CombinedComponent";
+
+  return CombinedComponent;
+};
