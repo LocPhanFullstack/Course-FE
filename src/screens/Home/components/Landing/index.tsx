@@ -6,52 +6,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { useCarousel } from "@/shared/hooks/useCarousel";
 import { HomeScreenContext } from "../../contexts";
-// import { Skeleton } from "@/components/ui/skeleton";
-
-const tags = [
-  "web development",
-  "enterprise IT",
-  "react nextjs",
-  "backend/frontend",
-  "javascript",
-];
-
-// const LoadingSkeleton = () => {
-//   return (
-//     <div className="landing-skeleton">
-//       <div className="landing-skeleton__hero">
-//         <div className="landing-skeleton__hero-content">
-//           <Skeleton className="landing-skeleton__title" />
-//           <Skeleton className="landing-skeleton__subtitle" />
-//           <Skeleton className="landing-skeleton__subtitle-secondary" />
-//           <Skeleton className="landing-skeleton__button" />
-//         </div>
-//         <Skeleton className="landing-skeleton__hero-image" />
-//       </div>
-
-//       <div className="landing-skeleton__featured">
-//         <Skeleton className="landing-skeleton__featured-title" />
-//         <Skeleton className="landing-skeleton__featured-description" />
-
-//         <div className="landing-skeleton__tags">
-//           {tags.map((__, i) => (
-//             <Skeleton key={i} className="loading-skeleton__tag" />
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+import { CourseCardSearch } from "@/components/course";
+import { useRouter } from "next/navigation";
+import { tags } from "./data";
+import { LoadingSkeleton } from "./components";
 
 const Landing = () => {
+  const router = useRouter();
   const currentImage = useCarousel({ totalImages: 3 });
   const { apiGetListOfCourses } = React.useContext(HomeScreenContext);
+  const courses = apiGetListOfCourses?.data;
 
-  React.useEffect(() => {
-    if (apiGetListOfCourses?.data) {
-      console.log("Data from API:", apiGetListOfCourses.data); // Chỉ log khi có dữ liệu
-    }
-  }, [apiGetListOfCourses?.data]); // Theo dõi khi dữ liệu thay đổi
+  const handleCourseClick = (courseId: string) => {
+    router.push(`/search?id=${courseId}`);
+  };
+
+  if (apiGetListOfCourses?.isPending) return <LoadingSkeleton />;
 
   return (
     <motion.div
@@ -87,7 +57,7 @@ const Landing = () => {
               src={src}
               alt={`Hero Banner ${i + 1}`}
               fill
-              sizes="sm"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority={i === currentImage}
               className={`landing__hero-image ${
                 i === currentImage ? "landing__hero-image--active" : ""
@@ -112,13 +82,29 @@ const Landing = () => {
         </p>
         <div className="landing__tags">
           {tags.map((tag, i) => (
-            <span key={i} className="landing__tags">
+            <span key={i} className="landing__tag">
               {tag}
             </span>
           ))}
         </div>
 
-        <div className="landing__courses">{/* Courses display */}</div>
+        <div className="landing__courses">
+          {courses &&
+            courses.data.slice(0, 4).map((course, i) => (
+              <motion.div
+                key={course.courseId}
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: i * 0.2 }}
+                viewport={{ amount: 0.4 }}
+              >
+                <CourseCardSearch
+                  course={course}
+                  onClick={() => handleCourseClick(course.courseId)}
+                />
+              </motion.div>
+            ))}
+        </div>
       </motion.div>
     </motion.div>
   );

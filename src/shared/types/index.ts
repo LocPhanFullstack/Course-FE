@@ -43,7 +43,7 @@ declare global {
     description: string;
     category: string;
     image?: string;
-    price?: string;
+    price?: number;
     level: "Beginer" | "Intermediate" | "Advanced";
     status: "Draft" | "Published";
     sections: ISection[];
