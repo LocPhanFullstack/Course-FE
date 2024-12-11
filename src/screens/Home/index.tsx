@@ -2,10 +2,10 @@
 
 import NonDashboardNavbar from "@/components/NonDashboardNavbar";
 import Footer from "@/components/Footer";
-import Landing from "./components/Landing";
 import { useAPIGetListOfCourses } from "./apis/get-list-of-courses";
 import React from "react";
 import { HomeScreenContext } from "./contexts";
+import { Landing } from "./components";
 
 export const HomeScreen = () => {
   const apiGetListOfCourses = useAPIGetListOfCourses();

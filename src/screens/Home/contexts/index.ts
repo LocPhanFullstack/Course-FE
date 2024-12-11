@@ -1,5 +1,5 @@
 import React from "react";
-import { useAPIGetListOfCourses } from "../apis/get-list-of-courses";
+import { useAPIGetListOfCourses } from "../apis";
 
 interface HomeScreenContextProps {
   apiGetListOfCourses: ReturnType<typeof useAPIGetListOfCourses>;

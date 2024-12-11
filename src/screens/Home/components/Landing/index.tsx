@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { tags } from "./data";
 import { LoadingSkeleton } from "./components";
 
-const Landing = () => {
+export const Landing = () => {
   const router = useRouter();
   const currentImage = useCarousel({ totalImages: 3 });
   const { apiGetListOfCourses } = React.useContext(HomeScreenContext);
@@ -109,5 +109,3 @@ const Landing = () => {
     </motion.div>
   );
 };
-
-export default Landing;
