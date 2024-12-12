@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <div className="footer">
       <p>&copy; 2024 VOIN. All Rights Reserved.</p>
@@ -19,5 +19,3 @@ const Footer = () => {
     </div>
   );
 };
-
-export default Footer;

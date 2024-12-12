@@ -1,11 +1,10 @@
 "use client";
 
-import NonDashboardNavbar from "@/components/NonDashboardNavbar";
-import Footer from "@/components/Footer";
 import { useAPIGetListOfCourses } from "./apis/get-list-of-courses";
 import React from "react";
 import { HomeScreenContext } from "./contexts";
 import { Landing } from "./components";
+import { Footer, NonDashboardNavbar } from "@/components/layout";
 
 export const HomeScreen = () => {
   const apiGetListOfCourses = useAPIGetListOfCourses();

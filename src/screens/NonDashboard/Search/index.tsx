@@ -2,12 +2,12 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
-import { useAPIGetListOfCourses } from "../Home/apis";
 import { SearchScreenContext } from "./contexts";
 import { LoadingSpinner } from "@/components/loading";
 import { motion } from "framer-motion";
 import { CourseCardSearch } from "@/components/course";
 import { SelectedCourse } from "./components";
+import { useAPIGetListOfCourses } from "@/screens/Home/apis";
 
 export const SearchScreen = () => {
   const router = useRouter();

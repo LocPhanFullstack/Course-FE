@@ -35,10 +35,7 @@ export const SelectedCourse = (props: SelectedCourseProps) => {
           <span className="selected-course__price">
             {formatPrice(course.price)}
           </span>
-          <Button
-            onClick={() => handleEnrollNow(course.courseId)}
-            className="bg-primary-700 hover:bg-primary-600"
-          >
+          <Button onClick={() => handleEnrollNow(course.courseId)}>
             Enroll Now
           </Button>
         </div>

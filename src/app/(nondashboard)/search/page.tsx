@@ -1,5 +1,5 @@
-import NonDashboardLayout from "@/components/layout/nondashboard";
-import { SearchScreen } from "@/screens/Search";
+import { NonDashboardLayout } from "@/components/layout";
+import { SearchScreen } from "@/screens/NonDashboard/Search";
 
 export default function Search() {
   return (
