@@ -5,7 +5,7 @@ import { cn } from "@/shared/utils/components";
 import { useUser } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { AppSidebar } from "../../app";
+import { AppSidebar, Navbar } from "../../app";
 
 export const DashboardLayout = ({
   children,
@@ -28,6 +28,7 @@ export const DashboardLayout = ({
       <div className="dashboard__content">
         {/* Chapter sidebar will go */}
         <div className={cn("dashboard__main")} style={{ height: "100vh" }}>
+          <Navbar />
           <main className="dashboard__body">{children}</main>
         </div>
       </div>
