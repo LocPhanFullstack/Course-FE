@@ -4,7 +4,8 @@ import { useAPIGetListOfCourses } from "./apis/get-list-of-courses";
 import React from "react";
 import { HomeScreenContext } from "./contexts";
 import { Landing } from "./components";
-import { Footer, NonDashboardNavbar } from "@/components/layout";
+import { NonDashboardNavbar } from "@/components/layout/nondashboard";
+import { Footer } from "@/components/layout/app";
 
 export const HomeScreen = () => {
   const apiGetListOfCourses = useAPIGetListOfCourses();

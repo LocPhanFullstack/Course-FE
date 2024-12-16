@@ -1,4 +1,4 @@
-import { AuthLayout } from "@/components/layout/auth/AuthLayout";
+import { AuthLayout } from "@/components/layout/auth";
 import { SignInScreen } from "@/screens/Auth/SignIn";
 
 export default function SignIn() {

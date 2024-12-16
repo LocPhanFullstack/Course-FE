@@ -6,12 +6,12 @@ declare global {
     expiry: string;
   }
 
-  export interface IUserSetting {
+  export interface IUserSettings {
     theme?: "light" | "dark";
-    emailAlert?: boolean;
-    smsAlert?: boolean;
+    emailAlerts?: boolean;
+    smsAlerts?: boolean;
     courseNotifications?: boolean;
-    notificationFrequency?: boolean;
+    notificationFrequency?: "immediate" | "daily" | "weekly";
   }
 
   export interface IUser {
@@ -24,7 +24,7 @@ declare global {
       userType: "teacher" | "student";
     };
     privateMetadata: {
-      settings?: IUserSetting;
+      settings?: IUserSettings;
       paymentMethods?: Array<IPaymentMethod>;
       defaultPaymentMethodId?: string;
       stripeCustomerId?: string;

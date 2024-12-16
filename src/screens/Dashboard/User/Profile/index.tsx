@@ -1,4 +1,4 @@
-import { Header } from "@/components/layout";
+import { Header } from "@/components/layout/app";
 import { UserProfile } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import React from "react";

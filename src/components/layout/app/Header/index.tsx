@@ -1,8 +1,8 @@
 import React from "react";
 
 interface HeaderProps {
-  title: string;
-  subtitle: string;
+  title?: string;
+  subtitle?: string;
   rightElement?: React.ReactNode;
 }
 
