@@ -111,6 +111,10 @@ declare global {
     sectionDescription?: string;
     chapters: IChapter[];
   }
+
+  export interface Window {
+    Clerk: any;
+  }
 }
 
 export {};

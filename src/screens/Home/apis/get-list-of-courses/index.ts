@@ -1,8 +1,7 @@
 import { useCacheAPIResponse } from "@/shared/hooks/useCacheAPIResponse";
-import { axiosFnTransformer } from "@/shared/utils/apis";
+import { customBaseQueryWithTransformation } from "@/shared/utils/apis";
+import { FetchArgs } from "@reduxjs/toolkit/query";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-
 type Request = {
   category?: string;
 };
@@ -19,9 +18,14 @@ type Error = {
 export const useAPIGetListOfCourses = () => {
   const result = useMutation<Response, Error, Request>({
     mutationFn: async (params) => {
-      return axiosFnTransformer(
-        axios.post("http://localhost:8001/courses", params)
-      );
+      const fetchArgs: FetchArgs = {
+        url: "/courses", // Đường dẫn API
+        method: "POST", // Hoặc GET nếu cần
+        body: params, // Tham số bạn truyền vào, ví dụ: { category: "some-category" }
+      };
+
+      // Sử dụng hàm customBaseQueryWithTransformation để xử lý kết quả API
+      return await customBaseQueryWithTransformation(fetchArgs);
     },
   });
   return useCacheAPIResponse(result);

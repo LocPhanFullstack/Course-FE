@@ -1,7 +1,7 @@
 import { useCacheAPIResponse } from "@/shared/hooks/useCacheAPIResponse";
-import { axiosFnTransformer } from "@/shared/utils/apis";
+import { customBaseQueryWithTransformation } from "@/shared/utils/apis";
+import { FetchArgs } from "@reduxjs/toolkit/query";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 
 type Request = {
   userId: string;
@@ -19,9 +19,14 @@ type Error = {
 export const useAPIUpdateUser = () => {
   const result = useMutation<Response, Error, Request>({
     mutationFn: async (params) => {
-      return axiosFnTransformer(
-        axios.post(`http://localhost:8001/users/clerk/${params.userId}`, params)
-      );
+      const fetchArgs: FetchArgs = {
+        url: `/users/clerk/${params.userId}`,
+        method: "POST",
+        body: params,
+      };
+
+      // Sử dụng hàm customBaseQueryWithTransformation để xử lý kết quả API
+      return await customBaseQueryWithTransformation(fetchArgs);
     },
   });
   return useCacheAPIResponse(result);
