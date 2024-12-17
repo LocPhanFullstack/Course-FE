@@ -3,7 +3,7 @@ import {
   FetchArgs,
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 const customBaseQuery = async (
   args: string | FetchArgs,
