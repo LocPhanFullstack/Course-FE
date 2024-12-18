@@ -39,34 +39,32 @@ export const Landing = () => {
         <div className="landing__hero-content">
           <h1 className="landing__title">Courses</h1>
           <p className="landing__description">
-            This is the list of courses you can enroll in.
+            This is the list of the courses you can enroll in.
             <br />
             Courses when you need them and want them.
           </p>
           <div className="landing__cta">
-            <Link href="/search">
+            <Link href="/search" scroll={false}>
               <div className="landing__cta-button">Search for Courses</div>
             </Link>
           </div>
         </div>
-
         <div className="landing__hero-images">
-          {["/hero1.jpg", "/hero2.jpg", "/hero3.jpg"].map((src, i) => (
+          {["/hero1.jpg", "/hero2.jpg", "/hero3.jpg"].map((src, index) => (
             <Image
               key={src}
               src={src}
-              alt={`Hero Banner ${i + 1}`}
+              alt={`Hero Banner ${index + 1}`}
               fill
+              priority={index === currentImage}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              priority={i === currentImage}
               className={`landing__hero-image ${
-                i === currentImage ? "landing__hero-image--active" : ""
+                index === currentImage ? "landing__hero-image--active" : ""
               }`}
             />
           ))}
         </div>
       </motion.div>
-
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
