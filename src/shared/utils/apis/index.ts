@@ -4,6 +4,7 @@ import {
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query";
 import { toast } from "sonner";
+import { AxiosResponse } from "axios";
 
 const customBaseQuery = async (
   args: string | FetchArgs,
@@ -85,3 +86,23 @@ export const customBaseQueryWithTransformation = async (
     }
   }
 };
+
+export function axiosFnTransformer(
+  axiosCalledFn: Promise<AxiosResponse<any, any>>
+) {
+  return axiosCalledFn
+    .then((res) => res.data)
+    .catch((err) => {
+      if (err.data?.message) {
+        throw err.data;
+      } else if (err.response?.data?.message) {
+        throw err.response;
+      } else if (err.message) {
+        throw err;
+      } else {
+        throw {
+          message: "An error has occurred",
+        };
+      }
+    });
+}

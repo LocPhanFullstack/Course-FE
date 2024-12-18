@@ -1,10 +1,10 @@
 import { NonDashboardLayout } from "@/components/layout/nondashboard";
-import { SearchScreen } from "@/screens/NonDashboard/Search";
+import { CheckoutScreen } from "@/screens/NonDashboard/Checkout";
 
 export default function Search() {
   return (
     <NonDashboardLayout>
-      <SearchScreen />
+      <CheckoutScreen />
     </NonDashboardLayout>
   );
 }

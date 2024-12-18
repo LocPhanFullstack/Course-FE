@@ -80,9 +80,10 @@ export const Landing = () => {
           courses just for you and preparing your entire journey for learning
           and making the most.
         </p>
+
         <div className="landing__tags">
-          {tags.map((tag, i) => (
-            <span key={i} className="landing__tag">
+          {tags.map((tag, index) => (
+            <span key={index} className="landing__tag">
               {tag}
             </span>
           ))}
@@ -90,12 +91,12 @@ export const Landing = () => {
 
         <div className="landing__courses">
           {courses &&
-            courses.data.slice(0, 4).map((course, i) => (
+            courses.data.slice(0, 4).map((course, index) => (
               <motion.div
                 key={course.courseId}
                 initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: i * 0.2 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
                 viewport={{ amount: 0.4 }}
               >
                 <CourseCardSearch

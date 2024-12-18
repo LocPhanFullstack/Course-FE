@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
+import { AccordionSections } from "@/screens/NonDashboard/components";
 import { formatPrice } from "@/shared/utils/components";
 import React from "react";
-import { AccordionSections } from "./components";
 
 interface SelectedCourseProps {
   course: ICourse;
