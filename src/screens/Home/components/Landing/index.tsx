@@ -56,7 +56,7 @@ export const Landing = () => {
               src={src}
               alt={`Hero Banner ${index + 1}`}
               fill
-              priority={index === currentImage}
+              priority
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className={`landing__hero-image ${
                 index === currentImage ? "landing__hero-image--active" : ""
