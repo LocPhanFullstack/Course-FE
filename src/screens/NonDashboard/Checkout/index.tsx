@@ -2,16 +2,32 @@
 
 import { LoadingSpinner } from "@/components/loading";
 import { useUser } from "@clerk/nextjs";
-import { CheckoutDetails, WizardStepper } from "./components";
+import { CheckoutDetails, Payment, WizardStepper } from "./components";
 import { useCheckoutNavigation } from "@/shared/hooks/useCheckoutNavigation";
 import { useAPIGetCourse } from "./apis";
 import React from "react";
 import { CheckoutScreenContext } from "./contexts";
+import { useSearchParams } from "next/navigation";
 
 export const CheckoutScreen = () => {
   const { isLoaded } = useUser();
+  const searchParams = useSearchParams();
   const { checkoutStep } = useCheckoutNavigation();
   const apiGetCourse = useAPIGetCourse();
+
+  const courseId = searchParams.get("id") ?? "";
+
+  const getCourse = React.useCallback(() => {
+    if (courseId && typeof courseId === "string") {
+      apiGetCourse?.mutate({ courseId });
+    }
+  }, [courseId]);
+
+  React.useEffect(() => {
+    if (courseId) {
+      getCourse();
+    }
+  }, [getCourse]);
 
   if (!isLoaded) return <LoadingSpinner />;
 
@@ -20,7 +36,7 @@ export const CheckoutScreen = () => {
       case 1:
         return <CheckoutDetails />;
       case 2:
-        return "payment page";
+        return <Payment />;
       case 3:
         return "completion page";
       default:

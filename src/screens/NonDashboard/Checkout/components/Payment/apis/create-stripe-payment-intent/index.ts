@@ -4,23 +4,25 @@ import { FetchArgs } from "@reduxjs/toolkit/query";
 import { useMutation } from "@tanstack/react-query";
 
 type Request = {
-  userId: string;
-  settings?: IUserSettings;
+  amount: number;
 };
 
 type Response = {
   message: string;
+  data: {
+    clientSecret: string;
+  };
 };
 
 type Error = {
   message: string;
 };
 
-export const useAPIUpdateUser = () => {
+export const useAPICreateStripePaymentIntent = () => {
   const result = useMutation<Response, Error, Request>({
     mutationFn: async (params) => {
       const fetchArgs: FetchArgs = {
-        url: `/users/clerk/${params.userId}`,
+        url: `/transaction/stripe/payment-intent`,
         method: "POST",
         body: params,
       };

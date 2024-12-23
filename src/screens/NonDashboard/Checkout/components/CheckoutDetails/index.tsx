@@ -18,7 +18,6 @@ export const CheckoutDetails = () => {
   const searchParams = useSearchParams();
   const { apiGetCourse } = React.useContext(CheckoutScreenContext);
 
-  const courseId = searchParams.get("id") ?? "";
   const showSignUp = searchParams.get("showSignUp") === "true";
   const selectedCourse = apiGetCourse?.data;
 
@@ -28,16 +27,6 @@ export const CheckoutDetails = () => {
       email: "",
     },
   });
-
-  const getCourse = React.useCallback(() => {
-    if (courseId && typeof courseId === "string") {
-      apiGetCourse?.mutate({ courseId });
-    }
-  }, [courseId]);
-
-  React.useEffect(() => {
-    getCourse();
-  }, [getCourse]);
 
   if (apiGetCourse?.isPending) return <LoadingSpinner />;
   if (apiGetCourse?.isError) return <div>Failed to fetch course data</div>;

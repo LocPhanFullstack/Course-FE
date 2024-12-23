@@ -73,7 +73,7 @@ export const customBaseQueryWithTransformation = async (
     }
 
     // Kiểm tra và trả về dữ liệu sau khi xử lý
-    return response.data || { message: "No data", data: [] };
+    return response || { message: "No data", data: [] };
   } catch (error: any) {
     if (error.data?.message) {
       throw error.data;
