@@ -57,7 +57,7 @@ export const SearchScreen = () => {
       >
         <h1 className="search__title">List of available courses</h1>
         <h2 className="search__subtitle">
-          {courses?.data.length} courses avaiable
+          {courses?.data.length} courses available
         </h2>
         <div className="search__content">
           <motion.div
