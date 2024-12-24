@@ -2,7 +2,12 @@
 
 import { LoadingSpinner } from "@/components/loading";
 import { useUser } from "@clerk/nextjs";
-import { CheckoutDetails, Payment, WizardStepper } from "./components";
+import {
+  CheckoutDetails,
+  Completion,
+  Payment,
+  WizardStepper,
+} from "./components";
 import { useCheckoutNavigation } from "@/shared/hooks/useCheckoutNavigation";
 import { useAPIGetCourse } from "./apis";
 import React from "react";
@@ -38,7 +43,7 @@ export const CheckoutScreen = () => {
       case 2:
         return <Payment />;
       case 3:
-        return "completion page";
+        return <Completion />;
       default:
         return "checkout details page";
     }
