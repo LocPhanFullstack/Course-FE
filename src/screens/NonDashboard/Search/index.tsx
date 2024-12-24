@@ -40,11 +40,11 @@ export const SearchScreen = () => {
 
   const handleCourseSelect = (course: ICourse) => {
     setSelectedCourse(course);
-    router.push(`/search?id=${course.courseId}`);
+    router.push(`/search?courseId=${course.courseId}`);
   };
 
   const handleEnrollNow = (courseId: string) => {
-    router.push(`/checkout?step=1&id=${courseId}&showSignUp=false`);
+    router.push(`/checkout?step=1&courseId=${courseId}&showSignUp=false`);
   };
 
   return (

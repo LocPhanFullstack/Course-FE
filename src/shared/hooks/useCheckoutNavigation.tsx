@@ -16,7 +16,7 @@ export const useCheckoutNavigation = () => {
       const showSignUp = isSignedIn ? "true" : "false";
 
       router.push(
-        `checkout?step=${newStep}&id=${courseId}&showSignUp=${showSignUp}`
+        `checkout?step=${newStep}&courseId=${courseId}&showSignUp=${showSignUp}`
       );
     },
     [courseId, isSignedIn, router]

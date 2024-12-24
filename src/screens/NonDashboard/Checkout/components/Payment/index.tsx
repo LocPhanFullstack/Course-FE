@@ -38,7 +38,7 @@ const PaymentContent = () => {
     const result = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${process.env.NEXT_PUBLIC_STRIPE_REDIRECT_URL}?id=${selectedCourse?.data.courseId}`,
+        return_url: `${process.env.NEXT_PUBLIC_STRIPE_REDIRECT_URL}?courseId=${selectedCourse?.data.courseId}`,
       },
       redirect: "if_required",
     });

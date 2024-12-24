@@ -12,12 +12,12 @@ export const SignUpScreen = () => {
   const courseId = searchParams.get("id");
 
   const signInUrl = isCheckoutPage
-    ? `/checkout?step=1&id=${courseId}&showSignUp=false`
+    ? `/checkout?step=1&courseId=${courseId}&showSignUp=false`
     : "/signin";
 
   const getRedirectUrl = () => {
     if (isCheckoutPage) {
-      return `/checkout?step=2&id=${courseId}`;
+      return `/checkout?step=2&courseId=${courseId}`;
     }
 
     const userType = user?.publicMetadata?.userType as string;

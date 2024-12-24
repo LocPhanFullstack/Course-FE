@@ -20,7 +20,7 @@ export const CheckoutScreen = () => {
   const { checkoutStep } = useCheckoutNavigation();
   const apiGetCourse = useAPIGetCourse();
 
-  const courseId = searchParams.get("id") ?? "";
+  const courseId = searchParams.get("courseId") ?? "";
 
   const getCourse = React.useCallback(() => {
     if (courseId && typeof courseId === "string") {

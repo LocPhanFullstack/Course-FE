@@ -18,7 +18,7 @@ export const Landing = () => {
   const courses = apiGetListOfCourses?.data;
 
   const handleCourseClick = (courseId: string) => {
-    router.push(`/search?id=${courseId}`);
+    router.push(`/search?courseId=${courseId}`);
   };
 
   if (apiGetListOfCourses?.isPending) return <LoadingSkeleton />;
