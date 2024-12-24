@@ -12,7 +12,7 @@ import { useAPIGetListOfCourses } from "@/screens/Home/apis";
 export const SearchScreen = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+  const courseId = searchParams.get("courseId");
   const apiGetListOfCourses = useAPIGetListOfCourses();
   const courses = apiGetListOfCourses.data;
   const [selectedCourse, setSelectedCourse] = React.useState<ICourse | null>(
@@ -26,14 +26,14 @@ export const SearchScreen = () => {
   React.useEffect(() => {
     if (apiGetListOfCourses.data) {
       const courses = apiGetListOfCourses.data;
-      if (id) {
-        const course = courses.data.find((c) => c.courseId === id);
+      if (courseId) {
+        const course = courses.data.find((c) => c.courseId === courseId);
         setSelectedCourse(course || courses.data[0]);
       } else {
         setSelectedCourse(courses.data[0]);
       }
     }
-  }, [apiGetListOfCourses, id]);
+  }, [apiGetListOfCourses, courseId]);
 
   if (apiGetListOfCourses.isPending) return <LoadingSpinner />;
   if (apiGetListOfCourses.isError) return <div>Failed to fetch courses!!!</div>;

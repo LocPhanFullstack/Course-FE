@@ -9,7 +9,7 @@ export const SignUpScreen = () => {
   const searchParams = useSearchParams();
   const { user } = useUser();
   const isCheckoutPage = searchParams.get("showSignUp") !== null;
-  const courseId = searchParams.get("id");
+  const courseId = searchParams.get("courseId");
 
   const signInUrl = isCheckoutPage
     ? `/checkout?step=1&courseId=${courseId}&showSignUp=false`

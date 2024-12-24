@@ -7,7 +7,7 @@ export const useCheckoutNavigation = () => {
   const searchParams = useSearchParams();
   const { isLoaded, isSignedIn } = useUser();
 
-  const courseId = searchParams.get("id") ?? "";
+  const courseId = searchParams.get("courseId") ?? "";
   const checkoutStep = parseInt(searchParams.get("step") ?? "1", 10);
 
   const navigateToStep = React.useCallback(
