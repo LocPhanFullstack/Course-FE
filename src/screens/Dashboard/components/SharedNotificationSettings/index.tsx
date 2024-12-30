@@ -13,6 +13,7 @@ import { Form } from "@/components/ui/form";
 import { Header } from "@/components/layout/app";
 import { CustomFormField } from "@/components/custom";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 interface SharedNotificationSettingsProps {
   title?: string;
@@ -57,8 +58,8 @@ export const SharedNotificationSettings = (
 
     try {
       await apiUpdateUser.mutate(updatedUser);
-    } catch (error) {
-      console.error("Failed to update user settings: ", error);
+    } catch (error: any) {
+      toast.error("Failed to update user settings: ", error);
     }
   };
 
