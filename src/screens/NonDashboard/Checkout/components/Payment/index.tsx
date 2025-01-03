@@ -13,6 +13,7 @@ import { CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAPICreateTransaction } from "./apis";
 import { toast } from "sonner";
+import { LoadingSpinner } from "@/components/loading";
 
 const PaymentContent = () => {
   const stripe = useStripe();
@@ -60,6 +61,9 @@ const PaymentContent = () => {
     await signOut();
     navigateToStep(1);
   };
+
+  if (apiGetCourse?.isPending) return <LoadingSpinner />;
+  if (apiGetCourse?.isError) return <div>Failed to fetch course data</div>;
 
   return (
     <div className="payment">

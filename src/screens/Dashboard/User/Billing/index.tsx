@@ -36,8 +36,8 @@ export const BillingScreen = () => {
     }) || [];
 
   React.useEffect(() => {
-    if (isLoaded && user) {
-      apiGetListOfTransactions.mutate({ userId: user?.id ?? "" });
+    if (user) {
+      apiGetListOfTransactions.mutate({ userId: user.id });
     }
   }, [user]);
 

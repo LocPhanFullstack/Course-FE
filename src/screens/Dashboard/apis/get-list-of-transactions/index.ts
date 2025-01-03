@@ -4,7 +4,7 @@ import { FetchArgs } from "@reduxjs/toolkit/query";
 import { useMutation } from "@tanstack/react-query";
 
 type Request = {
-  userId?: string;
+  userId: string;
 };
 
 type Response = {
@@ -20,9 +20,9 @@ export const useAPIGetListOfTransactions = () => {
   const result = useMutation<Response, Error, Request>({
     mutationFn: async (params) => {
       const fetchArgs: FetchArgs = {
-        url: `/transaction/list?userId=${params.userId}`,
-        method: "POST",
-        body: params,
+        url: "/transaction",
+        method: "GET",
+        params: { userId: params.userId },
       };
 
       return await customBaseQueryWithTransformation(fetchArgs);

@@ -20,9 +20,8 @@ export const useAPIGetCourse = () => {
   const result = useMutation<Response, Error, Request>({
     mutationFn: async (params) => {
       return axiosFnTransformer(
-        axios.post(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/${params.courseId}`,
-          params
+        axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/courses/${params.courseId}`
         )
       );
     },

@@ -14,6 +14,7 @@ import { Header } from "@/components/layout/app";
 import { CustomFormField } from "@/components/custom";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { LoadingSpinner } from "@/components/loading";
 
 interface SharedNotificationSettingsProps {
   title?: string;
@@ -25,7 +26,7 @@ export const SharedNotificationSettings = (
 ) => {
   const { title, subtitle } = props;
 
-  const { user } = useUser();
+  const { user, isLoaded } = useUser();
   const apiUpdateUser = useAPIUpdateUser();
 
   const currentSettings =
@@ -63,6 +64,7 @@ export const SharedNotificationSettings = (
     }
   };
 
+  if (!isLoaded || apiUpdateUser.isPending) return <LoadingSpinner />;
   if (!user) return <div>Please sign in to manage your settings</div>;
 
   return (
