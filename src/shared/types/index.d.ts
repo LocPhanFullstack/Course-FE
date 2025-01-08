@@ -47,7 +47,7 @@ declare global {
     level: "Beginer" | "Intermediate" | "Advanced";
     status: "Draft" | "Published";
     sections: ISection[];
-    enrollment?: Array<{ userId: string }>;
+    enrollments?: Array<{ userId: string }>;
   }
 
   export interface ITransaction {

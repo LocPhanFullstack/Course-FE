@@ -18,7 +18,7 @@ export const SelectedCourse = (props: SelectedCourseProps) => {
         <p className="selected-course__author">
           By {course.teacherName}
           <span className="selected-course__enrollment-count">
-            {course.enrollment?.length}
+            {course.enrollments?.length}
           </span>
         </p>
       </div>

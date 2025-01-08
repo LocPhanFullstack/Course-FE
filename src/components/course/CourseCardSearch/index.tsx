@@ -43,7 +43,7 @@ export const CourseCardSearch = (props: CourseCardSearchProps) => {
               {formatPrice(course.price)}
             </span>
             <span className="course-card-search__enrollment">
-              {course.enrollment?.length} Enrolled
+              {course.enrollments?.length} Enrolled
             </span>
           </div>
         </div>

@@ -4,25 +4,29 @@ import { FetchArgs } from "@reduxjs/toolkit/query";
 import { useMutation } from "@tanstack/react-query";
 
 type Request = {
-  userId: string;
-  settings?: IUserSettings;
+  teacherId: string;
+  teacherName: string;
 };
 
 type Response = {
   message: string;
+  data: ICourse;
 };
 
 type Error = {
   message: string;
 };
 
-export const useAPIUpdateUser = () => {
+export const useAPICreateCourse = () => {
   const result = useMutation<Response, Error, Request>({
     mutationFn: async (params) => {
       const fetchArgs: FetchArgs = {
-        url: `/users/clerk/${params.userId}`,
+        url: "/courses",
         method: "POST",
-        body: params,
+        params: {
+          teacherId: params.teacherId,
+          teacherName: params.teacherName,
+        },
       };
 
       return await customBaseQueryWithTransformation(fetchArgs);
