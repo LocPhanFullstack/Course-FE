@@ -33,7 +33,7 @@ export const Toolbar = (props: ToolbarProps) => {
         className="toolbar__search"
       />
       <Select onValueChange={onCategoryChange}>
-        <SelectTrigger className="toolbaR__select">
+        <SelectTrigger className="toolbar__select">
           <SelectValue placeholder="Categories" />
         </SelectTrigger>
         <SelectContent className="bg-customgreys-primarybg hover:bg-customgreys-primarybg">

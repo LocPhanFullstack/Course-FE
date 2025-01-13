@@ -45,24 +45,24 @@ export const TeacherCourseCard = (props: TeacherCourseCardProps) => {
           </CardDescription>
 
           <p className="text-sm mb-2">
-            Status:{" "}
+            Status:
             <span
               className={cn(
-                "font-semibold px-2 py-1 rounded",
+                "font-semibold px-2 py-1 ml-1 rounded",
                 course.status === "Published"
                   ? "bg-green-500/20 text-green-400"
-                  : "bg-red-500/20 text-red-400"
+                  : "text-red-400"
               )}
             >
               {course.status}
             </span>
           </p>
           {course.enrollments && (
-            <p className="mt-1 ml-1 inline-block text-secondary bg-secondary/10 text-sm font-normal">
+            <p className="mt-1 inline-block text-secondary bg-secondary/10 text-sm font-normal">
               <span className="font-bold text-white-100">
                 {course.enrollments.length}
               </span>{" "}
-              Student{course.enrollments.length > 1 ? "s" : ""} Enrolled
+              student{course.enrollments.length > 1 ? "s" : ""} enrolled
             </p>
           )}
         </div>

@@ -1,5 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
+import { clerkClient } from "@clerk/clerk-sdk-node";
 
 const isStudentRoute = createRouteMatcher(["/user/(.*)"]);
 const isTeacherRoute = createRouteMatcher(["/teacher/(.*)"]);
@@ -7,9 +8,13 @@ const isTeacherRoute = createRouteMatcher(["/teacher/(.*)"]);
 export default clerkMiddleware(async (auth, req) => {
   const { sessionClaims } = await auth();
 
-  const userRole =
-    (sessionClaims?.metadata as { userType: "student" | "teacher" })
-      ?.userType || "student";
+  if (!sessionClaims) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+
+  const userId = sessionClaims.sub;
+  const user = await clerkClient.users.getUser(userId);
+  const userRole = user.publicMetadata?.userType || "student";
 
   if (isStudentRoute(req)) {
     if (userRole !== "student") {
