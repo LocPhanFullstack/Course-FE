@@ -6,3 +6,4 @@ export * from "./get-list-of-transactions";
 export * from "./update-user";
 export * from "./create-stripe-payment-intent";
 export * from "./create-transaction";
+export * from "./update-course";
