@@ -7,7 +7,7 @@ import { LoadingSpinner } from "@/components/loading";
 import { motion } from "framer-motion";
 import { CourseCardSearch } from "@/components/course";
 import { SelectedCourse } from "./components";
-import { useAPIGetListOfCourses } from "@/screens/Home/apis";
+import { useAPIGetListOfCourses } from "@/shared/apis";
 
 export const SearchScreen = () => {
   const router = useRouter();

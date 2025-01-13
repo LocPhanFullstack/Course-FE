@@ -1,4 +1,4 @@
-import { useAPIGetListOfCourses } from "@/screens/Home/apis";
+import { useAPIGetListOfCourses } from "@/shared/apis";
 import React from "react";
 
 interface SearchScreenContextProps {

@@ -9,10 +9,10 @@ import {
   WizardStepper,
 } from "./components";
 import { useCheckoutNavigation } from "@/shared/hooks/useCheckoutNavigation";
-import { useAPIGetCourse } from "./apis";
 import React from "react";
 import { CheckoutScreenContext } from "./contexts";
 import { useSearchParams } from "next/navigation";
+import { useAPIGetCourse } from "@/shared/apis";
 
 export const CheckoutScreen = () => {
   const { isLoaded } = useUser();

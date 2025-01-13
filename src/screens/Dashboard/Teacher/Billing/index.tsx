@@ -2,7 +2,6 @@
 
 import { useUser } from "@clerk/nextjs";
 import React from "react";
-import { useAPIGetListOfTransactions } from "../../apis";
 import { LoadingSpinner } from "@/components/loading";
 import {
   Select,
@@ -20,6 +19,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { formatPrice } from "@/shared/utils/components";
+import { useAPIGetListOfTransactions } from "@/shared/apis";
 
 export const BillingScreen = () => {
   const [paymentType, setPaymentType] = React.useState("all");

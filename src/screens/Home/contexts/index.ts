@@ -1,5 +1,5 @@
+import { useAPIGetListOfCourses } from "@/shared/apis";
 import React from "react";
-import { useAPIGetListOfCourses } from "../apis";
 
 interface HomeScreenContextProps {
   apiGetListOfCourses: ReturnType<typeof useAPIGetListOfCourses>;

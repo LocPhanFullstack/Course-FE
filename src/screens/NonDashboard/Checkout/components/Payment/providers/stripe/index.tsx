@@ -5,9 +5,9 @@ import {
   Appearance,
   StripeElementsOptions,
 } from "@stripe/stripe-js";
-import { useAPICreateStripePaymentIntent } from "../../apis";
 import { CheckoutScreenContext } from "@/screens/NonDashboard/Checkout/contexts";
 import { LoadingSpinner } from "@/components/loading";
+import { useAPICreateStripePaymentIntent } from "@/shared/apis";
 
 if (!process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY) {
   throw new Error("NEXT_PUBLIC_STRIPE_PUBLIC_KEY is not set");

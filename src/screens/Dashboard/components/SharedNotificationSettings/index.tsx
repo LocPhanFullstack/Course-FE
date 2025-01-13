@@ -2,7 +2,6 @@
 
 import { useUser } from "@clerk/nextjs";
 import React from "react";
-import { useAPIUpdateUser } from "../../apis";
 import { useForm } from "react-hook-form";
 import {
   NotificationSettingsFormData,
@@ -15,6 +14,7 @@ import { CustomFormField } from "@/components/custom";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { LoadingSpinner } from "@/components/loading";
+import { useAPIUpdateUser } from "@/shared/apis";
 
 interface SharedNotificationSettingsProps {
   title?: string;

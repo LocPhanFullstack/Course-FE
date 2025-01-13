@@ -51,7 +51,7 @@ export const TeacherCourseCard = (props: TeacherCourseCardProps) => {
                 "font-semibold px-2 py-1 ml-1 rounded",
                 course.status === "Published"
                   ? "bg-green-500/20 text-green-400"
-                  : "text-red-400"
+                  : "bg-red-500/20 text-red-400"
               )}
             >
               {course.status}

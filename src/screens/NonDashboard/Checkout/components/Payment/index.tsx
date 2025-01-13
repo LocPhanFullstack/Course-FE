@@ -11,9 +11,9 @@ import { useClerk, useUser } from "@clerk/nextjs";
 import { CoursePreview } from "../CheckoutDetails/components";
 import { CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useAPICreateTransaction } from "./apis";
 import { toast } from "sonner";
 import { LoadingSpinner } from "@/components/loading";
+import { useAPICreateTransaction } from "@/shared/apis";
 
 const PaymentContent = () => {
   const stripe = useStripe();

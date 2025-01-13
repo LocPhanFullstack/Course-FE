@@ -1,11 +1,11 @@
 "use client";
 
-import { useAPIGetListOfCourses } from "./apis/get-list-of-courses";
 import React from "react";
 import { HomeScreenContext } from "./contexts";
 import { Landing } from "./components";
 import { NonDashboardNavbar } from "@/components/layout/nondashboard";
 import { Footer } from "@/components/layout/app";
+import { useAPIGetListOfCourses } from "@/shared/apis";
 
 export const HomeScreen = () => {
   const apiGetListOfCourses = useAPIGetListOfCourses();

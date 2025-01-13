@@ -1,14 +1,17 @@
 "use client";
 
-import { useAPIGetListOfCourses } from "@/screens/Home/apis";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { useAPICreateCourse, useAPIDeleteCourse } from "./apis";
 import { LoadingSpinner } from "@/components/loading";
 import { Header } from "@/components/layout/app";
 import { Button } from "@/components/ui/button";
 import { TeacherCourseCard, Toolbar } from "./components";
+import {
+  useAPICreateCourse,
+  useAPIDeleteCourse,
+  useAPIGetListOfCourses,
+} from "@/shared/apis";
 
 export const CoursesSummary = () => {
   const router = useRouter();
