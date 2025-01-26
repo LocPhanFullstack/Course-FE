@@ -17,14 +17,16 @@ export const SignInScreen = () => {
 
   const getRedirectUrl = () => {
     if (isCheckoutPage) {
-      return `/checkout?step=2&courseId=${courseId}`;
+      return `/checkout?step=2&courseId=${courseId}&showSignUp=true`;
     }
 
     const userType = user?.publicMetadata?.userType as string;
     if (userType === "teacher") {
       return "/teacher/courses";
+    } else if (userType === "student") {
+      return "/user/courses";
     }
-    return "/user/courses";
+    return "/";
   };
 
   return (

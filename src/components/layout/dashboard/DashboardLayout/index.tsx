@@ -5,6 +5,7 @@ import { cn } from "@/shared/utils/components";
 import { useUser } from "@clerk/nextjs";
 import React from "react";
 import { AppSidebar } from "../../app";
+import { useRouter } from "next/navigation";
 
 export const DashboardLayout = ({
   children,
@@ -12,11 +13,17 @@ export const DashboardLayout = ({
   children: React.ReactNode;
 }) => {
   const { user, isLoaded } = useUser();
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (!user) {
+      router.push("/signin"); 
+    }
+  }, []);
 
   // Handle useEffect isCoursePage
 
-  if (!isLoaded) return <LoadingSpinner />;
-  if (!user) return <div>Please sign in to access this page</div>;
+  if (!isLoaded || !user) return <LoadingSpinner />;
 
   return (
     <div className="dashboard">
