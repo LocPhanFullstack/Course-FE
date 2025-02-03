@@ -7,7 +7,7 @@ import { Form } from '@/components/ui/form'
 import { CourseFormData, courseSchema } from '@/configs/libs/schemas'
 import { centsToDollars } from '@/shared/utils/components'
 import { setSections } from '@/state'
-import { useGetCourseQuery, useUpdateCourseMutation } from '@/state/api'
+import { useGetCourseQuery } from '@/state/api'
 import { useAppDispatch, useAppSelector } from '@/state/redux'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowLeft } from 'lucide-react'
@@ -19,12 +19,13 @@ export const CourseEditor = () => {
   const router = useRouter()
   const params = useParams()
   const id = params.id as string
-  const { data: course, isLoading, refetch } = useGetCourseQuery(id)
-  const [updateCourse] = useUpdateCourseMutation()
+  const { data: course } = useGetCourseQuery(id)
+  // const [updateCourse] = useUpdateCourseMutation()
   // Upload video functionality
 
   const dispatch = useAppDispatch()
   const { sections } = useAppSelector((state) => state.global.courseEditor)
+  console.log(sections)
 
   const methods = useForm<CourseFormData>({
     resolver: zodResolver(courseSchema),
