@@ -12,8 +12,7 @@ interface ChapterItemProps {
 }
 
 export const ChapterItem = (props: ChapterItemProps) => {
-  const { chapter, chapterIndex, draggableProvider, sectionIndex } = props
-  const dispatch = useDispatch()
+  const { chapterIndex, draggableProvider } = props
 
   return (
     <div
