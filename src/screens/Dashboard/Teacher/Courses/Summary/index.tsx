@@ -43,7 +43,10 @@ export const CoursesSummary = () => {
   const handleCreateCourse = async () => {
     if (!user) return
 
-    const result = await createCourse({ teacherId: user.id, teacherName: user.fullName || 'Unknown teacher' }).unwrap()
+    const result = await createCourse({
+      teacherId: user.id,
+      teacherName: user.fullName || 'Unknown teacher',
+    }).unwrap()
     router.push(`/teacher/courses/${result.courseId}`)
   }
 
@@ -65,7 +68,13 @@ export const CoursesSummary = () => {
       <Toolbar onSearch={setSearchTerm} onCategoryChange={setSelectedCategory} />
       <div className='teacher-courses__grid'>
         {filteredCourses.map((course) => (
-          <TeacherCourseCard key={course.courseId} course={course} onEdit={handleEdit} onDelete={handleDelete} isOwner={course.teacherId === user.id} />
+          <TeacherCourseCard
+            key={course.courseId}
+            course={course}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            isOwner={course.teacherId === user.id}
+          />
         ))}
       </div>
     </div>

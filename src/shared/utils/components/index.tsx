@@ -42,7 +42,7 @@ export const courseCategories = [
   { value: 'technology', label: 'Technology' },
   { value: 'science', label: 'Science' },
   { value: 'mathematics', label: 'Mathematics' },
-  { value: 'artificial-intelligence', label: 'Artificial Intelligence' },
+  { value: 'Artificial Intelligence', label: 'Artificial Intelligence' },
 ] as const
 
 export const createCourseFormData = (data: CourseFormData, sections: ISection[]): FormData => {
@@ -68,7 +68,10 @@ export const createCourseFormData = (data: CourseFormData, sections: ISection[])
 
 export const combineComponents = (components: React.ComponentType<any>[]) => {
   const CombinedComponent = components.reduce(
-    (AccumulatedComponents: React.ComponentType<any>, CurrentComponent: React.ComponentType<any>) => {
+    (
+      AccumulatedComponents: React.ComponentType<any>,
+      CurrentComponent: React.ComponentType<any>,
+    ) => {
       const WrappedComponent = ({ children, ...props }: React.ComponentProps<any>) => {
         return (
           <AccumulatedComponents {...props}>
@@ -78,7 +81,9 @@ export const combineComponents = (components: React.ComponentType<any>[]) => {
       }
 
       // Set display name for better debugging
-      WrappedComponent.displayName = `Wrapped(${CurrentComponent.displayName || CurrentComponent.name})`
+      WrappedComponent.displayName = `Wrapped(${
+        CurrentComponent.displayName || CurrentComponent.name
+      })`
 
       return WrappedComponent
     },

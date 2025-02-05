@@ -16,31 +16,30 @@ const customBaseQuery = async (args: string | FetchArgs, api: BaseQueryApi, extr
 
   try {
     const result: any = await baseQuery(args, api, extraOptions)
-    console.log('API Response:', result) // Log phản hồi từ API để kiểm tra
-
     if (result.error) {
       const errorData = result.error.data
-      const errorMessage = errorData?.message || result.error.status.toString() || 'An error occurred'
+      const errorMessage =
+        errorData?.message || result.error.status.toString() || 'An error occurred'
       toast.error(`Error: ${errorMessage}`)
+      console.log(result.error)
+      return { error: { status: result.error.status, message: errorMessage } }
     }
-
     const isMutationRequest = (args as FetchArgs).method && (args as FetchArgs).method !== 'GET'
-
     if (isMutationRequest) {
       const successMessage = result.data?.message
       if (successMessage) toast.success(successMessage)
     }
-
     if (result.data) {
-      result.data = result.data.data
+      if (result.data.data) {
+        return { data: result.data.data }
+      }
+      return { data: result.data }
     } else if (result.error?.status === 204 || result.meta?.response?.status === 24) {
       return { data: null }
     }
-
-    return result
+    return { error: { status: 'UNKNOWN_ERROR', message: 'Unknown error' } }
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
-
     return { error: { status: 'FETCH_ERROR', error: errorMessage } }
   }
 }
@@ -73,7 +72,9 @@ export const api = createApi({
     }),
 
     getCourse: build.query<ICourse, string>({
-      query: (courseId) => `courses/${courseId}`,
+      query: (courseId) => {
+        return `courses/${courseId}`
+      },
       providesTags: (result, error, courseId) => [{ type: 'Courses', courseId }],
     }),
 
