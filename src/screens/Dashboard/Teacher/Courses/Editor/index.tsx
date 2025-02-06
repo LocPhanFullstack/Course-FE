@@ -5,9 +5,9 @@ import { Header } from '@/components/layout/app'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { CourseFormData, courseSchema } from '@/configs/libs/schemas'
-import { centsToDollars } from '@/shared/utils/components'
+import { centsToDollars, createCourseFormData } from '@/shared/utils/components'
 import { openSectionModal, setSections } from '@/state'
-import { useGetCourseQuery } from '@/state/api'
+import { useGetCourseQuery, useUpdateCourseMutation } from '@/state/api'
 import { useAppDispatch, useAppSelector } from '@/state/redux'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowLeft, Plus } from 'lucide-react'
@@ -15,13 +15,14 @@ import { useParams, useRouter } from 'next/navigation'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { DroppableComponent as Droppable } from './components'
+import { ChapterModal, SectionModal } from '@/components/modal'
 
 export const CourseEditor = () => {
   const router = useRouter()
   const params = useParams()
   const courseId = params.courseId as string
-  const { data: course, isLoading } = useGetCourseQuery(courseId)
-  // const [updateCourse] = useUpdateCourseMutation()
+  const { data: course, isLoading, refetch } = useGetCourseQuery(courseId)
+  const [updateCourse] = useUpdateCourseMutation()
   // Upload video functionality
 
   const dispatch = useAppDispatch()
@@ -51,15 +52,22 @@ export const CourseEditor = () => {
     }
   }, [course, methods])
 
-  // const onSubmit = async (data: CourseFormData) => {
-  //   try {
-  //     const formData = createCourseFormData(data, sections)
+  const onSubmit = async (data: CourseFormData) => {
+    try {
+      // const updatedSections = await uploadAllVideos(sections, id, getUploadVideoUrl)
 
-  //     await apiUpdateCourse.mutate({ courseId: id, updateData: formData })
-  //   } catch (error) {
-  //     console.error('Failed to update course: ', error)
-  //   }
-  // }
+      const formData = createCourseFormData(data, [])
+
+      await updateCourse({
+        courseId,
+        formData,
+      }).unwrap()
+
+      refetch()
+    } catch (error) {
+      console.error('Failed to update course:', error)
+    }
+  }
 
   return (
     <React.Fragment>
@@ -74,7 +82,7 @@ export const CourseEditor = () => {
       </div>
 
       <Form {...methods}>
-        <form>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
           <Header
             title='Course Setup'
             subtitle='Complete all fields and save your course'
@@ -153,8 +161,8 @@ export const CourseEditor = () => {
                   onClick={() => dispatch(openSectionModal({ sectionIndex: null }))}
                   className='border-none text-primary-700 group'
                 >
-                  <Plus className='mr-1 h-4 w-4 text-primary-700 group-hover:white-100' />
-                  <span className='text-primary-700 group-hover:white-100'>Add Section</span>
+                  <Plus className='mr-1 h-4 w-4 text-primary-700 group-hover:text-white-100' />
+                  <span className='text-primary-700 group-hover:text-white-100'>Add Section</span>
                 </Button>
               </div>
 
@@ -169,6 +177,9 @@ export const CourseEditor = () => {
           </div>
         </form>
       </Form>
+
+      <ChapterModal />
+      <SectionModal />
     </React.Fragment>
   )
 }

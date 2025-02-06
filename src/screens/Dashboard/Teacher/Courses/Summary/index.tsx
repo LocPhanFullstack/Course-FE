@@ -31,7 +31,7 @@ export const CoursesSummary = () => {
   }, [courses, searchTerm, selectedCategory])
 
   const handleEdit = (course: ICourse) => {
-    router.push(`/teacher/courses/${course.courseId}`)
+    router.push(`/teacher/courses/${course.courseId}`, { scroll: false })
   }
 
   const handleDelete = async (course: ICourse) => {

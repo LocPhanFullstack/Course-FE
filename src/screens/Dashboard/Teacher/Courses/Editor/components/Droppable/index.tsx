@@ -32,10 +32,15 @@ export const DroppableComponent = () => {
     const endIndex = result.destination.index
 
     const updatedSections = [...sections]
-    const updatedChapers = [...updatedSections[sectionIndex].chapters]
-    const [reorderedSection] = updatedChapers.splice(startIndex, 1)
-    updatedChapers.splice(endIndex, 0, reorderedSection)
-    updatedSections[sectionIndex].chapters = updatedChapers
+    const updatedChapters = [...updatedSections[sectionIndex].chapters]
+
+    const [reorderedSection] = updatedChapters.splice(startIndex, 1)
+    updatedChapters.splice(endIndex, 0, reorderedSection)
+
+    updatedSections[sectionIndex] = {
+      ...updatedSections[sectionIndex],
+      chapters: updatedChapters,
+    }
     dispatch(setSections(updatedSections))
   }
 
@@ -54,14 +59,14 @@ export const DroppableComponent = () => {
                   <div
                     ref={draggableProvider.innerRef}
                     {...draggableProvider.draggableProps}
-                    className={`droppale-sections ${
+                    className={`droppable-section ${
                       sectionIndex % 2 === 0 ? 'droppable-section--even' : 'droppable-section--odd'
                     }`}
                   >
                     <SectionHeader
-                      sectionIndex={sectionIndex}
                       section={section}
-                      dragHandleProps={draggableProvider.draggableProps}
+                      sectionIndex={sectionIndex}
+                      dragHandleProps={draggableProvider.dragHandleProps}
                     />
 
                     <DragDropContext
@@ -100,7 +105,12 @@ export const DroppableComponent = () => {
                       variant='outline'
                       size='sm'
                       onClick={() =>
-                        dispatch(openChapterModal({ sectionIndex, chapterIndex: null }))
+                        dispatch(
+                          openChapterModal({
+                            sectionIndex,
+                            chapterIndex: null,
+                          }),
+                        )
                       }
                       className='add-chapter-button group'
                     >
@@ -111,6 +121,7 @@ export const DroppableComponent = () => {
                 )}
               </Draggable>
             ))}
+            {provided.placeholder}
           </div>
         )}
       </Droppable>
