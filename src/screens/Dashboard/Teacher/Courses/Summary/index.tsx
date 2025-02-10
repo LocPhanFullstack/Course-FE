@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { TeacherCourseCard, Toolbar } from './components'
 import { useCreateCourseMutation, useDeleteCourseMutation, useGetCoursesQuery } from '@/state/api'
 
-export const CoursesSummary = () => {
+export const TeacherCoursesSummary = () => {
   const router = useRouter()
   const { user } = useUser()
   const { data: courses, isLoading, isError } = useGetCoursesQuery({ category: 'all' })

@@ -47,9 +47,9 @@ const customBaseQuery = async (args: string | FetchArgs, api: BaseQueryApi, extr
 export const api = createApi({
   baseQuery: customBaseQuery,
   reducerPath: 'api',
-  tagTypes: ['Users', 'Courses'],
+  tagTypes: ['Users', 'Courses', 'UserCourseProgress'],
   endpoints: (build) => ({
-    updateUser: build.mutation<IUser, Partial<IUser> & { userId: string }>({
+    updateUser: build.mutation<IUser, Partial<IUserSettings> & { userId: string }>({
       query: ({ userId, ...updatedUser }) => ({
         url: `users/clerk/${userId}`,
         method: 'PUT',
@@ -134,6 +134,48 @@ export const api = createApi({
     USER COURSE PROGRESS
     =============== 
     */
+    getUserEnrolledCourses: build.query<ICourse[], string>({
+      query: (userId) => `users/course-progress/${userId}/enrolled-courses`,
+      providesTags: ['Courses', 'UserCourseProgress'],
+    }),
+
+    getUserCourseProgress: build.query<IUserCourseProgress, { userId: string; courseId: string }>({
+      query: ({ userId, courseId }) => `users/course-progress/${userId}/courses/${courseId}`,
+      providesTags: ['UserCourseProgress'],
+    }),
+
+    updateUserCourseProgress: build.mutation<
+      IUserCourseProgress,
+      {
+        userId: string
+        courseId: string
+        progressData: {
+          sections: ISectionProgress[]
+        }
+      }
+    >({
+      query: ({ userId, courseId, progressData }) => ({
+        url: `users/course-progress/${userId}/courses/${courseId}`,
+        method: 'PUT',
+        body: progressData,
+      }),
+      invalidatesTags: ['UserCourseProgress'],
+      async onQueryStarted({ userId, courseId, progressData }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          api.util.updateQueryData('getUserCourseProgress', { userId, courseId }, (draft) => {
+            Object.assign(draft, {
+              ...draft,
+              sections: progressData.sections,
+            })
+          }),
+        )
+        try {
+          await queryFulfilled
+        } catch {
+          patchResult.undo()
+        }
+      },
+    }),
   }),
 })
 

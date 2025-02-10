@@ -16,7 +16,10 @@ interface SharedNotificationSettingsProps {
   subtitle?: string
 }
 
-export const SharedNotificationSettings = ({ title = 'Notification Settings', subtitle = 'Manage your notification settings' }: SharedNotificationSettingsProps) => {
+export const SharedNotificationSettings = ({
+  title = 'Notification Settings',
+  subtitle = 'Manage your notification settings',
+}: SharedNotificationSettingsProps) => {
   const { user } = useUser()
   const [updateUser] = useUpdateUserMutation()
 
@@ -32,6 +35,8 @@ export const SharedNotificationSettings = ({ title = 'Notification Settings', su
     },
   })
 
+  if (!user) return <div>Please sign in to manage your settings.</div>
+
   const onSubmit = async (data: NotificationSettingsFormData, refresh = false) => {
     if (!user) return
 
@@ -39,7 +44,6 @@ export const SharedNotificationSettings = ({ title = 'Notification Settings', su
       userId: user.id,
       publicMetadata: {
         ...user.publicMetadata,
-        userType: user.publicMetadata.userType as 'student' | 'teacher',
         settings: {
           ...currentSettings,
           ...data,
@@ -49,7 +53,6 @@ export const SharedNotificationSettings = ({ title = 'Notification Settings', su
 
     try {
       await updateUser(updatedUser)
-
       if (refresh) {
         window.location.reload()
       }
@@ -58,15 +61,20 @@ export const SharedNotificationSettings = ({ title = 'Notification Settings', su
     }
   }
 
-  if (!user) return <div>Please sign in to manage your settings.</div>
-
   return (
     <div className='notification-settings'>
       <Header title={title} subtitle={subtitle} />
       <Form {...methods}>
-        <form onSubmit={methods.handleSubmit((data) => onSubmit(data, true))} className='notification-settings__form'>
+        <form
+          onSubmit={methods.handleSubmit((data) => onSubmit(data, true))}
+          className='notification-settings__form'
+        >
           <div className='notification-settings__fields'>
-            <CustomFormField name='courseNotifications' label='Course Notifications' type='switch' />
+            <CustomFormField
+              name='courseNotifications'
+              label='Course Notifications'
+              type='switch'
+            />
             <CustomFormField name='emailAlerts' label='Email Alerts' type='switch' />
             <CustomFormField name='smsAlerts' label='SMS Alerts' type='switch' />
 
