@@ -16,7 +16,7 @@ const PaymentContent = () => {
   const elements = useElements()
   const { navigateToStep } = useCheckoutNavigation()
   const { course, courseId } = useCurrentCourse()
-  const [createTransaction, isLoading] = useCreateTransactionMutation()
+  const [createTransaction] = useCreateTransactionMutation()
   const { user } = useUser()
   const { signOut } = useClerk()
 
@@ -56,8 +56,6 @@ const PaymentContent = () => {
     navigateToStep(1)
   }
 
-  if (isLoading) return <LoadingSpinner />
-
   return (
     <div className='payment'>
       <div className='payment__container'>
@@ -71,7 +69,9 @@ const PaymentContent = () => {
           <form id='payment-form' className='payment__form' onSubmit={handleSubmit}>
             <div className='payment__content'>
               <h1 className='payment__title'>Checkout</h1>
-              <p className='payment__subtitle'>Fill out the payment details below to complete your purchase</p>
+              <p className='payment__subtitle'>
+                Fill out the payment details below to complete your purchase
+              </p>
 
               <div className='payment__method'>
                 <h3 className='payment__method-title'>Payment Method</h3>
@@ -92,11 +92,21 @@ const PaymentContent = () => {
 
       {/* Navigation Button */}
       <div className='payment__actions'>
-        <Button className='hover:bg-white-50/10' variant='outline' type='button' onClick={handleSignOutAndNavigate}>
+        <Button
+          className='hover:bg-white-50/10'
+          variant='outline'
+          type='button'
+          onClick={handleSignOutAndNavigate}
+        >
           Switch Account
         </Button>
 
-        <Button form='payment-form' type='submit' className='payment__submit' disabled={!stripe || !elements}>
+        <Button
+          form='payment-form'
+          type='submit'
+          className='payment__submit'
+          disabled={!stripe || !elements}
+        >
           Pay with Credit Card
         </Button>
       </div>
