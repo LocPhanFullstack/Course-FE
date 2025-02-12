@@ -17,7 +17,7 @@ import { useForm } from 'react-hook-form'
 import { DroppableComponent as Droppable } from './components'
 import { ChapterModal, SectionModal } from '@/components/modal'
 
-export const CourseEditor = () => {
+export const CourseEditorScreen = () => {
   const router = useRouter()
   const params = useParams()
   const courseId = params.courseId as string

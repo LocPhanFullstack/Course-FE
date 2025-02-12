@@ -6,10 +6,11 @@ import React from 'react'
 import { LoadingSpinner } from '@/components/loading'
 import { Header } from '@/components/layout/app'
 import { Button } from '@/components/ui/button'
-import { TeacherCourseCard, Toolbar } from './components'
+import { TeacherCourseCard } from './components'
 import { useCreateCourseMutation, useDeleteCourseMutation, useGetCoursesQuery } from '@/state/api'
+import { Toolbar } from '@/screens/Dashboard/components'
 
-export const TeacherCoursesSummary = () => {
+export const TeacherCoursesSummaryScreen = () => {
   const router = useRouter()
   const { user } = useUser()
   const { data: courses, isLoading, isError } = useGetCoursesQuery({ category: 'all' })

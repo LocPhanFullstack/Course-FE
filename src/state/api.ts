@@ -189,4 +189,7 @@ export const {
   useGetTransactionsQuery,
   useCreateStripePaymentIntentMutation,
   useCreateTransactionMutation,
+  useGetUserEnrolledCoursesQuery,
+  useGetUserCourseProgressQuery,
+  useUpdateUserCourseProgressMutation,
 } = api

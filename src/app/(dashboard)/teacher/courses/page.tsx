@@ -1,10 +1,10 @@
 import { DashboardLayout } from '@/components/layout/dashboard'
-import { TeacherCoursesSummary } from '@/screens/Dashboard/Teacher/Courses/Summary'
+import { TeacherCoursesSummaryScreen } from '@/screens/Dashboard/Teacher/Courses/Summary'
 
-export default function TeacherProfile() {
+export default function TeacherCoursesSummary() {
   return (
     <DashboardLayout>
-      <TeacherCoursesSummary />
+      <TeacherCoursesSummaryScreen />
     </DashboardLayout>
   )
 }

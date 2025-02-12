@@ -1,1 +1,2 @@
-export * from "./SharedNotificationSettings";
+export * from './SharedNotificationSettings'
+export * from './Toolbar'

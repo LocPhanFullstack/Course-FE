@@ -1,10 +1,10 @@
 import { DashboardLayout } from '@/components/layout/dashboard'
-import { CourseEditor } from '@/screens/Dashboard/Teacher/Courses/Editor'
+import { CourseEditorScreen } from '@/screens/Dashboard/Teacher/Courses/Editor'
 
-export default function TeacherCourse() {
+export default function CourseEditor() {
   return (
     <DashboardLayout>
-      <CourseEditor />
+      <CourseEditorScreen />
     </DashboardLayout>
   )
 }
