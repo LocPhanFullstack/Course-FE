@@ -100,7 +100,7 @@ declare global {
 
   export interface ISectionProgress {
     sectionId: string
-    completed: boolean
+    chapters: IChapterProgress[]
   }
 
   export interface ISection {
