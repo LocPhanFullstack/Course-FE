@@ -16,12 +16,26 @@ export const ChapterScreen = () => {
     currentSection,
     currentChapter,
     isLoading,
-    isChapterCompleted,
-    updateChapterProgress,
     hasMarkedComplete,
+    isChapterCompleted,
     setHasMarkedComplete,
+    updateChapterProgress,
   } = useCourseProgressData()
   const playerRef = React.useRef<ReactPlayer>(null)
+
+  const handleProgress = ({ played }: { played: number }) => {
+    if (
+      played >= 0.8 &&
+      !hasMarkedComplete &&
+      currentChapter &&
+      currentSection &&
+      userProgress?.sections &&
+      !isChapterCompleted()
+    ) {
+      setHasMarkedComplete(true)
+      updateChapterProgress(currentSection.sectionId, currentChapter.chapterId, true)
+    }
+  }
 
   if (isLoading) return <LoadingSpinner />
   if (!user) return <div>Please sign in to view this course.</div>
@@ -53,6 +67,7 @@ export const ChapterScreen = () => {
           <CardContent className='course__video-container'>
             {currentChapter?.video ? (
               <ReactPlayer
+                onProgress={handleProgress}
                 ref={playerRef}
                 url={currentChapter.video as string}
                 controls
