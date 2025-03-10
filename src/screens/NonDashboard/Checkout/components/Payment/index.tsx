@@ -7,7 +7,6 @@ import { CoursePreview } from '../CheckoutDetails/components'
 import { CreditCard } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
-import { LoadingSpinner } from '@/components/loading'
 import { useCurrentCourse } from '@/shared/hooks/useCurrentCourse'
 import { useCreateTransactionMutation } from '@/state/api'
 

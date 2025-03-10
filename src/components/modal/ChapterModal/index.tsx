@@ -1,14 +1,4 @@
-import { ChapterFormData, chapterSchema } from '@/configs/libs/schemas'
-import { addChapter, closeChapterModal, editChapter } from '@/state'
-import { useAppSelector } from '@/state/redux'
-import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
-import { toast } from 'sonner'
-import { v4 as uuidv4 } from 'uuid'
-import { CustomModal } from '../CustomModal'
-import { X } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -17,13 +7,22 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { CustomFormField } from '@/components/custom'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import { ChapterFormData, chapterSchema } from '@/configs/libs/schemas'
+import { addChapter, closeChapterModal, editChapter } from '@/state'
+import { useAppDispatch, useAppSelector } from '@/state/redux'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { X } from 'lucide-react'
+import React, { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import { v4 as uuidv4 } from 'uuid'
+import { CustomModal } from '../CustomModal'
+import { CustomFormField } from '@/components/custom'
 
 export const ChapterModal = () => {
-  const dispatch = useDispatch()
-  const { isChapterModalOpen, selectedChapterIndex, selectedSectionIndex, sections } =
+  const dispatch = useAppDispatch()
+  const { isChapterModalOpen, selectedSectionIndex, selectedChapterIndex, sections } =
     useAppSelector((state) => state.global.courseEditor)
 
   const chapter: IChapter | undefined =
@@ -40,7 +39,7 @@ export const ChapterModal = () => {
     },
   })
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (chapter) {
       methods.reset({
         title: chapter.title,
@@ -72,7 +71,12 @@ export const ChapterModal = () => {
     }
 
     if (selectedChapterIndex === null) {
-      dispatch(addChapter({ sectionIndex: selectedSectionIndex, chapter: newChapter }))
+      dispatch(
+        addChapter({
+          sectionIndex: selectedSectionIndex,
+          chapter: newChapter,
+        }),
+      )
     } else {
       dispatch(
         editChapter({
