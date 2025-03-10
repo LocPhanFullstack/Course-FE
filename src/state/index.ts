@@ -56,8 +56,8 @@ export const globalSlice = createSlice({
     addSection: (state, action: PayloadAction<ISection>) => {
       state.courseEditor.sections.push(action.payload)
     },
-    editSection: (state, action: PayloadAction<{ index: number; section: ISection }>) => {
-      state.courseEditor.sections[action.payload.index] = action.payload.section
+    editSection: (state, action: PayloadAction<{ sectionIndex: number; section: ISection }>) => {
+      state.courseEditor.sections[action.payload.sectionIndex] = action.payload.section
     },
     deleteSection: (state, action: PayloadAction<number>) => {
       state.courseEditor.sections.splice(action.payload, 1)
